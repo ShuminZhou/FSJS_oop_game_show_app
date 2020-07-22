@@ -64,33 +64,45 @@ class Game{
     }
 
     gameOver(){
-        const overlay = document.getElementById("overlay");
-        const winLoseMessage = document.getElementById("game-over-message");
-        const startButton = document.getElementById("btn__reset");
-        const newBtn = document.createElement("button");
+        window.overlay = document.getElementById("overlay");
+        window.winLoseMessage = document.getElementById("game-over-message");
+        window.startButton = document.getElementById("btn__reset");
+        window.newBtn = document.createElement("button");
         newBtn.textContent = "Start New Game";
         newBtn.setAttribute("id","restart")
-
         if(this.missed === 5){
             overlay.style.display = "block";
             overlay.classList.replace("start","lose");
             winLoseMessage.textContent = "Sorry,You Loss all the heart,Please Try Again!";
             overlay.removeChild(startButton);
             overlay.appendChild(newBtn)
-        }else if(this.checkForWin()){
-            overlay.style.display = "block";
-            overlay.classList.replace("start","win");
-            winLoseMessage.textContent = "Great Job,You guess the phrase!";
-            overlay.removeChild(startButton);
-            overlay.appendChild(newBtn)
         }
     }
 
 
-    handleInteraction(letter){
-       const result =  phrase.checkLetter(letter);
-       this.removeLife(result);
-       this.gameOver();
+    handleInteraction(button){
+       const result =  phrase.checkLetter(button);
+       const letter = button.textContent;
+       if(result){
+        phrase.showMatchedLetter(letter);
+        button.classList.add("chosen");
+        button.setAttribute("disabled",true);
+       }else{
+        button.classList.add("wrong");
+        button.setAttribute("disabled",true);
+        this.removeLife(result);
+       }
+       const checkWin = this.checkForWin();
+       if(checkWin){
+            overlay.style.display = "block";
+            overlay.classList.replace("start","win");
+            winLoseMessage.textContent = "Great Job,You guess the phrase!";
+            overlay.removeChild(startButton);
+            overlay.appendChild(newBtn);
+            
+       }else{
+        this.gameOver();
+       }
     }
 
 

@@ -7,6 +7,7 @@
          this.pharse = pharse.toLowerCase();//This is the actual phrase the Phrase object is representing need to conver to all lowerCase;
      }
 
+     
      addPhraseToDisplay(){
         const randomPhrase = this.pharse;
         const letters = randomPhrase.split("");
@@ -27,13 +28,8 @@
          const letter = button.textContent;
          const correntPhrase = this.pharse;
          if(correntPhrase.indexOf(letter) > -1){
-            this.showMatchedLetter(letter);
-            button.classList.add("chosen");
-            button.setAttribute("disabled",true);
             return true;
          }else{
-            button.classList.add("wrong");
-            button.setAttribute("disabled",true);
             return false;
          }
          
