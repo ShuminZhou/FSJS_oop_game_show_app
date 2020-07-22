@@ -34,6 +34,10 @@ class Game{
         return randomPhrase;
     }
 
+    /**
+     * start the game when the startGame button is click
+     * hide the overlay and set phrase property to new phrase;
+     */
     startGame(){
         document.getElementById("overlay").style.display = "none";
         this.activePhrase = this.getRandomPhrase();
@@ -41,6 +45,10 @@ class Game{
         phrase.addPhraseToDisplay();
     }
 
+    /**
+     * to check if a player is gusss all the letter and reveal them.
+     * @return {boolean} a random phrase that use in the game
+     */
     checkForWin(){
         const allShow = document.querySelectorAll(".show");
         const allLetters = document.querySelectorAll(".letter");
@@ -51,7 +59,10 @@ class Game{
         }
     };
 
-
+    /**
+     * to remove the hearts when the have wrong guess
+     * add missed property each time when player have a wrong guess.
+     */
    removeLife(boolean){
         const scoreBoard = document.querySelector("#scoreboard ol");
         const scoreBoardHearts = scoreBoard.children;
@@ -62,7 +73,11 @@ class Game{
             scoreBoardImage.setAttribute("src","images/lostHeart.png");
         }
     }
-
+    
+    /**
+     * if the user geuss misses five time,the game over and add lose messaege
+     * add a new button to the screem.
+     */
     gameOver(){
         window.overlay = document.getElementById("overlay");
         window.winLoseMessage = document.getElementById("game-over-message");
@@ -79,7 +94,15 @@ class Game{
         }
     }
 
-
+    /**
+     * when the user click on the onScreen keyboard,add wrong or chose class to it,
+     * also make the chose letter disable,make interactive with methods.
+     * showMatchedLetter()
+     * checkForWin();
+     * gameOver();
+     * removeLeft();
+     * add win messsage to the screem
+     */
     handleInteraction(button){
        const result =  phrase.checkLetter(button);
        const letter = button.textContent;
@@ -105,7 +128,10 @@ class Game{
        }
     }
 
-
+    /**
+     * going to reset the game.
+     * 
+     */
     gameReset(){
         document.location.reload(true);
     }

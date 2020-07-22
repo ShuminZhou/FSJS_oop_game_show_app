@@ -7,7 +7,10 @@
          this.pharse = pharse.toLowerCase();//This is the actual phrase the Phrase object is representing need to conver to all lowerCase;
      }
 
-     
+    /**
+     * method that is going to append phrase letter into HTML
+     * append the correct class to each letter.
+     */
      addPhraseToDisplay(){
         const randomPhrase = this.pharse;
         const letters = randomPhrase.split("");
@@ -23,7 +26,10 @@
             document.querySelector("#phrase ul").appendChild(li);
         }
      }
-
+    /**
+     * to check the letter is match the phrase lettter,if match return true,if no return false.
+     * @return {boolean};
+     */
      checkLetter(button){
          const letter = button.textContent;
          const correntPhrase = this.pharse;
@@ -35,6 +41,10 @@
          
      }
 
+    /**
+     * show the corrent letter to the screem,
+     * by add class show
+     */
      showMatchedLetter(letter){
          const allLetters = document.querySelectorAll(".letter");
         for(let i = 0 ; i < allLetters.length; i ++){
