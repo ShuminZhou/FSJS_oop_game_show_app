@@ -3,8 +3,8 @@
  * Phrase.js */
 
  class Phrase{
-     constructor(pharse){
-         this.pharse = pharse.toLowerCase();//This is the actual phrase the Phrase object is representing need to conver to all lowerCase;
+     constructor(phrase){
+         this.phrase = phrase.toLowerCase();//This is the actual phrase the Phrase object is representing need to conver to all lowerCase;
      }
 
     /**
@@ -12,7 +12,7 @@
      * append the correct class to each letter.
      */
      addPhraseToDisplay(){
-        const randomPhrase = this.pharse;
+        const randomPhrase = this.phrase;
         const letters = randomPhrase.split("");
         for(let i = 0; i < letters.length; i ++){
             const li = document.createElement("li");
@@ -32,7 +32,7 @@
      */
      checkLetter(button){
          const letter = button.textContent;
-         const correntPhrase = this.pharse;
+         const correntPhrase = this.phrase;
          if(correntPhrase.indexOf(letter) > -1){
             if(button.classList.contains("chosen")){
                 return false;
