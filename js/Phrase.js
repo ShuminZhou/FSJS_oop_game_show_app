@@ -34,6 +34,9 @@
          const letter = button.textContent;
          const correntPhrase = this.pharse;
          if(correntPhrase.indexOf(letter) > -1){
+            if(button.classList.contains("chosen")){
+                return false;
+            }
             return true;
          }else{
             return false;
