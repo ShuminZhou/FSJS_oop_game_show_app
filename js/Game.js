@@ -43,6 +43,7 @@ class Game{
         this.activePhrase = this.getRandomPhrase();
         window.phrase = new Phrase(this.activePhrase);
         phrase.addPhraseToDisplay();
+        return true;
     }
 
     /**
@@ -69,28 +70,47 @@ class Game{
         if(boolean === false){
             this.missed += 1;
             const scoreBoardIndex = this.missed - 1;
-            const scoreBoardImage = scoreBoardHearts[scoreBoardIndex].firstElementChild;
-            scoreBoardImage.setAttribute("src","images/lostHeart.png");
+            if(this.missed < 5){
+                const scoreBoardImage = scoreBoardHearts[scoreBoardIndex].firstElementChild;
+                scoreBoardImage.setAttribute("src","images/lostHeart.png");
+            }
+            
         }
     }
     
     /**
      * if the user geuss misses five time,the game over and add lose messaege
      * add a new button to the screem.
+     * @return {boolean};
      */
     gameOver(){
+        /**
+         * having the feature to creat a return the refresh buttons
+         */
         window.overlay = document.getElementById("overlay");
         window.winLoseMessage = document.getElementById("game-over-message");
         window.startButton = document.getElementById("btn__reset");
         window.newBtn = document.createElement("button");
+        window.oldBtn = document.getElementById("restart");
         newBtn.textContent = "Start New Game";
         newBtn.setAttribute("id","restart")
+        /**
+         * if user having five missed remove the "Start Game" button and 
+         * add "Start New Game" button
+         * 
+         */
         if(this.missed === 5){
             overlay.style.display = "block";
             overlay.classList.replace("start","lose");
             winLoseMessage.textContent = "Sorry,You Loss all the heart,Please Try Again!";
-            overlay.removeChild(startButton);
-            overlay.appendChild(newBtn)
+            if(startButton){
+                overlay.removeChild(startButton);
+            }
+            if(oldBtn){
+                overlay.removeChild(oldBtn);
+            }
+            overlay.appendChild(newBtn);
+            return true;
         }
     }
 
@@ -106,25 +126,44 @@ class Game{
     handleInteraction(button){
        const result =  phrase.checkLetter(button);
        const letter = button.textContent;
+       /**
+        * if user corrent guess the letter
+        * add chose class and disabled it
+        */
        if(result){
         phrase.showMatchedLetter(letter);
         button.classList.add("chosen");
         button.setAttribute("disabled",true);
        }else{
+           /**
+            * if user incorrect guess at "wrong" class 
+            * and disable it
+            */
         button.classList.add("wrong");
         button.setAttribute("disabled",true);
         this.removeLife(result);
        }
-       const checkWin = this.checkForWin();
+       const checkWin = this.checkForWin();// store checkForWin()'s boolean value
        if(checkWin){
+           /**
+            * if checkForWin() method return true,and user Correct guess all the letters,
+            * replace start class to win class and remove "Start Game" btn and 
+            * append  "Start New Game" btn.
+            */
+            window.startButton = document.getElementById("btn__reset");
             overlay.style.display = "block";
             overlay.classList.replace("start","win");
             winLoseMessage.textContent = "Great Job,You guess the phrase!";
-            overlay.removeChild(startButton);
+            if(startButton){
+                overlay.removeChild(startButton);
+            };
+            if(oldBtn){
+                overlay.removeChild(oldBtn);
+            }
             overlay.appendChild(newBtn);
-            
+            return true;
        }else{
-        this.gameOver();
+        this.gameOver(); // called GameOver() method
        }
     }
 
@@ -133,6 +172,6 @@ class Game{
      * 
      */
     gameReset(){
-        document.location.reload(true);
+        document.location.reload(true); // reload the page;
     }
 }
