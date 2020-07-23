@@ -63,6 +63,7 @@ class Game{
     /**
      * to remove the hearts when the have wrong guess
      * add missed property each time when player have a wrong guess.
+     * @param {boolean};
      */
    removeLife(boolean){
         const scoreBoard = document.querySelector("#scoreboard ol");
@@ -81,7 +82,7 @@ class Game{
     /**
      * if the user geuss misses five time,the game over and add lose messaege
      * add a new button to the screem.
-     * @return {boolean};
+     * @param {boolean};
      */
     gameOver(boolean){
         /**
@@ -130,7 +131,7 @@ class Game{
      * checkForWin();
      * gameOver();
      * removeLeft();
-     * add win messsage to the screem
+     * add win or lose messsage to the screem
      */
     handleInteraction(button){
        const result =  this.activePhrase.checkLetter(button);
