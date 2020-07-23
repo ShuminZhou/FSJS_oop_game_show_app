@@ -11,7 +11,6 @@ document.getElementById("btn__reset").addEventListener("click",()=>{
     const checkWin = newGame.checkForWin();//return checkForWin boolean value;
     const gameOver = newGame.gameOver();//return gameOver() boolean value;
     if(gameStart){ // only run when gameStart method return true;
-        if(!checkWin || !gameOver){ // only run when either checkForWin() or gameOver() return false.
             document.addEventListener("keydown",(e)=>{
                 /**
                  * Add a keydown events to the keyboard and set it to having the same feature as click event.
@@ -25,7 +24,6 @@ document.getElementById("btn__reset").addEventListener("click",()=>{
                   }
                 }
             })
-        }
     }
 })
 

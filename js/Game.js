@@ -26,7 +26,7 @@ class Game{
 
     /**
      * generated a random phrase that exist property phrases array
-     * @return {string} a random phrase that use in the game
+     * @return {object} a random phrase that use in the game
      */
     getRandomPhrase(){
         const randomIndex = Math.floor(Math.random() * this.phrases.length);
@@ -138,7 +138,7 @@ class Game{
        const letter = button.textContent;
        /**
         * if user corrent guess the letter
-        * add chose class and disabled it
+        * add chosen class and disabled it
         */
        if(result){
         this.activePhrase.showMatchedLetter(letter);
@@ -148,7 +148,7 @@ class Game{
         this.gameOver(checkWin);
        }else{
            /**
-            * if user incorrect guess at "wrong" class 
+            * if user incorrect guess add "wrong" class 
             * and disable it
             */
         button.classList.add("wrong");
