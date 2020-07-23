@@ -88,11 +88,11 @@ class Game{
         /**
          * having the feature to creat a return the refresh buttons
          */
-        window.overlay = document.getElementById("overlay");
-        window.winLoseMessage = document.getElementById("game-over-message");
-        window.startButton = document.getElementById("btn__reset");
-        window.newBtn = document.createElement("button");
-        window.oldBtn = document.getElementById("restart");
+        const overlay = document.getElementById("overlay");
+        const winLoseMessage = document.getElementById("game-over-message");
+        const startButton = document.getElementById("btn__reset");
+        const newBtn = document.createElement("button");
+        const oldBtn = document.getElementById("restart");
         newBtn.textContent = "Start New Game";
         newBtn.setAttribute("id","restart");
 
