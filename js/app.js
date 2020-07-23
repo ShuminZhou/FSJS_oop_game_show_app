@@ -8,8 +8,6 @@ let newGame = null
 document.getElementById("btn__reset").addEventListener("click",()=>{
     newGame = new Game();// create a new Game object and it's variable to global;
     const gameStart = newGame.startGame(); // return startGame boolean value and run startGame();
-    const checkWin = newGame.checkForWin();//return checkForWin boolean value;
-    const gameOver = newGame.gameOver();//return gameOver() boolean value;
     if(gameStart){ // only run when gameStart method return true;
             document.addEventListener("keydown",(e)=>{
                 /**
