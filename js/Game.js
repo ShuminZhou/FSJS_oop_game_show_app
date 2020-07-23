@@ -74,7 +74,7 @@ class Game{
                 const scoreBoardImage = scoreBoardHearts[scoreBoardIndex].firstElementChild;
                 scoreBoardImage.setAttribute("src","images/lostHeart.png");
             }
-            
+            this.gameOver(false);
         }
     }
     
@@ -83,7 +83,7 @@ class Game{
      * add a new button to the screem.
      * @return {boolean};
      */
-    gameOver(){
+    gameOver(boolean){
         /**
          * having the feature to creat a return the refresh buttons
          */
@@ -93,24 +93,33 @@ class Game{
         window.newBtn = document.createElement("button");
         window.oldBtn = document.getElementById("restart");
         newBtn.textContent = "Start New Game";
-        newBtn.setAttribute("id","restart")
-        /**
-         * if user having five missed remove the "Start Game" button and 
-         * add "Start New Game" button
-         * 
-         */
-        if(this.missed === 5){
+        newBtn.setAttribute("id","restart");
+
+        if(boolean === true){
+            window.startButton = document.getElementById("btn__reset");
             overlay.style.display = "block";
-            overlay.classList.replace("start","lose");
-            winLoseMessage.textContent = "Sorry,You Loss all the heart,Please Try Again!";
+            overlay.classList.replace("start","win");
+            winLoseMessage.textContent = "Great Job,You guess the phrase!";
             if(startButton){
                 overlay.removeChild(startButton);
-            }
+            };
             if(oldBtn){
                 overlay.removeChild(oldBtn);
             }
             overlay.appendChild(newBtn);
-            return true;
+        }else{
+            if(this.missed === 5){
+                overlay.style.display = "block";
+                overlay.classList.replace("start","lose");
+                winLoseMessage.textContent = "Sorry,You Loss all the heart,Please Try Again!";
+                if(startButton){
+                    overlay.removeChild(startButton);
+                }
+                if(oldBtn){
+                    overlay.removeChild(oldBtn);
+                }
+                overlay.appendChild(newBtn);
+            }
         }
     }
 
@@ -134,6 +143,8 @@ class Game{
         this.activePhrase.showMatchedLetter(letter);
         button.classList.add("chosen");
         button.setAttribute("disabled",true);
+        const checkWin = this.checkForWin();// store checkForWin()'s boolean value
+        this.gameOver(checkWin);
        }else{
            /**
             * if user incorrect guess at "wrong" class 
@@ -142,28 +153,6 @@ class Game{
         button.classList.add("wrong");
         button.setAttribute("disabled",true);
         this.removeLife(result);
-       }
-       const checkWin = this.checkForWin();// store checkForWin()'s boolean value
-       if(checkWin){
-           /**
-            * if checkForWin() method return true,and user Correct guess all the letters,
-            * replace start class to win class and remove "Start Game" btn and 
-            * append  "Start New Game" btn.
-            */
-            window.startButton = document.getElementById("btn__reset");
-            overlay.style.display = "block";
-            overlay.classList.replace("start","win");
-            winLoseMessage.textContent = "Great Job,You guess the phrase!";
-            if(startButton){
-                overlay.removeChild(startButton);
-            };
-            if(oldBtn){
-                overlay.removeChild(oldBtn);
-            }
-            overlay.appendChild(newBtn);
-            return true;
-       }else{
-        this.gameOver(); // called GameOver() method
        }
     }
 
