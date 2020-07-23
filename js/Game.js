@@ -95,7 +95,10 @@ class Game{
         const oldBtn = document.getElementById("restart");
         newBtn.textContent = "Start New Game";
         newBtn.setAttribute("id","restart");
-
+        /**
+         * if the player guesses all the letter 
+         * run this code
+         */
         if(boolean === true){
             window.startButton = document.getElementById("btn__reset");
             overlay.style.display = "block";
@@ -109,6 +112,9 @@ class Game{
             }
             overlay.appendChild(newBtn);
         }else{
+            /**
+             * if the player lose all the hearts run this code
+             */
             if(this.missed === 5){
                 overlay.style.display = "block";
                 overlay.classList.replace("start","lose");
