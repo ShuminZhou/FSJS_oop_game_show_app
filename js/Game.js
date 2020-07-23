@@ -31,7 +31,8 @@ class Game{
     getRandomPhrase(){
         const randomIndex = Math.floor(Math.random() * this.phrases.length);
         const randomPhrase = this.phrases[randomIndex];
-        return randomPhrase;
+        const activePhrase = new Phrase(randomPhrase);
+        return activePhrase;
     }
 
     /**
@@ -41,8 +42,7 @@ class Game{
     startGame(){
         document.getElementById("overlay").style.display = "none";
         this.activePhrase = this.getRandomPhrase();
-        window.phrase = new Phrase(this.activePhrase);
-        phrase.addPhraseToDisplay();
+        this.activePhrase.addPhraseToDisplay();
         return true;
     }
 
@@ -124,14 +124,14 @@ class Game{
      * add win messsage to the screem
      */
     handleInteraction(button){
-       const result =  phrase.checkLetter(button);
+       const result =  this.activePhrase.checkLetter(button);
        const letter = button.textContent;
        /**
         * if user corrent guess the letter
         * add chose class and disabled it
         */
        if(result){
-        phrase.showMatchedLetter(letter);
+        this.activePhrase.showMatchedLetter(letter);
         button.classList.add("chosen");
         button.setAttribute("disabled",true);
        }else{

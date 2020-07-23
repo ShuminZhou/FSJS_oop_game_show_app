@@ -1,12 +1,12 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
-
+let newGame = null
 /**
  * Event handler when a user click on the Start Game Button.
  */
 document.getElementById("btn__reset").addEventListener("click",()=>{
-    window.newGame = new Game();// create a new Game object and it's variable to global;
+    newGame = new Game();// create a new Game object and it's variable to global;
     const gameStart = newGame.startGame(); // return startGame boolean value and run startGame();
     const checkWin = newGame.checkForWin();//return checkForWin boolean value;
     const gameOver = newGame.gameOver();//return gameOver() boolean value;
